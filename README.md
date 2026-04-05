@@ -1,7 +1,7 @@
  📘 Calculadora API
 
 API desenvolvida em **FastAPI** para realizar operações matemáticas básicas e intermediárias.  
-Projeto avaliativo da disciplina **Programação de Sistemas Distribuídos** da **Universidade do Grandes Lagos - UNILAGO**, sob supervisão do Professor **Gleydes Oliveira**.
+Projeto avaliativo da disciplina **Programação de Sistemas Distribuídos** da **Universidade do Grandes Lagos - UNILAGO**, sob supervisão do Professor: https://github.com/gleydes.
 
 ---
 
