@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculadora API</title>
+</head>
+<body>
+  <h1>Calculadora API</h1>
+  <input id="n1" type="number" placeholder="Número 1">
+  <input id="n2" type="number" placeholder="Número 2">
+  <select id="op">
+    <option value="somar">Somar</option>
+    <option value="subtrair">Subtrair</option>
+    <option value="multiplicar">Multiplicar</option>
+    <option value="dividir">Dividir</option>
+    <option value="potencia">Potência</option>
+    <option value="raiz">Raiz</option>
+  </select>
+  <button onclick="calcular()">Calcular</button>
+  <p id="resultado"></p>
+
+  <script>
+    async function calcular() {
+      const n1 = parseFloat(document.getElementById("n1").value);
+      const n2 = parseFloat(document.getElementById("n2").value);
+      const op = document.getElementById("op").value;
+
+      // Para a operação raiz, só usamos numero1
+      let body = { numero1: n1, numero2: n2 };
+      if (op === "raiz") {
+        body = { numero1: n1, numero2: 0 };
+      }
+
+      try {
+        const res = await fetch("http://127.0.0.1:8000/" + op, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body)
+        });
+
+        const data = await res.json();
+
+        if (data.resultado !== undefined) {
+          document.getElementById("resultado").innerText = "Resultado: " + data.resultado;
+        } else if (data.detail) {
+          document.getElementById("resultado").innerText = "Erro: " + data.detail;
+        }
+      } catch (error) {
+        document.getElementById("resultado").innerText = "Erro de conexão com a API";
+      }
+    }
+  </script>
+</body>
+</html>
